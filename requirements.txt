@@ -1,4 +1,4 @@
 colorlog~=6.8.2
-matplotlib
-pandas
-plotly.express
+pandas~=2.2.2
+matplotlib~=3.9.0
+plotly~=5.22.0
