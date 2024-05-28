@@ -13,5 +13,6 @@ venv.bak/
 # Data
 data/
 
-# Idea
+# IDE settings
 .idea/
+.vscode/
