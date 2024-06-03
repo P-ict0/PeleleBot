@@ -1,18 +1,23 @@
 from src.utils.logger import Logger
+from utils.helpers import read_file
+from data_processing.data_processing import DataProcessor
 
 
 class Main:
     def __init__(self) -> None:
         self.logger = Logger(__name__).get_logger()
 
-    def test_logger(self) -> None:
-        self.logger.debug("This is a debug message.")
-        self.logger.info("This is an info message.")
-        self.logger.warning("This is a warning message.")
-        self.logger.error("This is an error message.")
-        self.logger.critical("This is a critical message.")
+    def run(self, file_path: str) -> None:
+        # Read the raw data from the file
+        self.logger.info(f"Reading data from {file_path}")
+        raw_data = read_file(file_path)
+
+        # Process the data
+        self.logger.info("Processing data")
+        processor = DataProcessor(raw_data)
+        processed_data = processor.process_data()
 
 
 if __name__ == "__main__":
     main = Main()
-    main.test_logger()
+    main.run("data/raw_data.txt")

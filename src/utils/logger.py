@@ -3,7 +3,7 @@ from colorlog import ColoredFormatter
 
 
 class Logger:
-    """ A simple console logger class that outputs colorized logs. """
+    """A simple console logger class that outputs colorized logs."""
 
     def __init__(self, name: str) -> None:
         """
@@ -26,14 +26,14 @@ class Logger:
             datefmt=None,
             reset=True,
             log_colors={
-                'DEBUG': 'cyan',
-                'INFO': 'green',
-                'WARNING': 'yellow',
-                'ERROR': 'red',
-                'CRITICAL': 'red,bg_white',
+                "DEBUG": "cyan",
+                "INFO": "green",
+                "WARNING": "yellow",
+                "ERROR": "red",
+                "CRITICAL": "red,bg_white",
             },
             secondary_log_colors={},
-            style='%'
+            style="%",
         )
 
         # Add formatter to console handler
