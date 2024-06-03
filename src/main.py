@@ -16,6 +16,8 @@ class Main:
         self.logger.info("Processing data")
         processor = DataProcessor(raw_data)
         processed_data = processor.process_data()
+
+        self.logger.info("Plotting data")
         plot_dataframe_simple(
             processed_data,
             "Date",
