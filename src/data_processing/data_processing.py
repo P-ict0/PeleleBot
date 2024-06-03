@@ -36,7 +36,12 @@ class DataProcessor:
                 time = start.group(2)
                 sender = start.group(3)
                 message = line[len(start.group(0)) :]
-                current_message = {"Date": date, "Time": time, "Sender": sender, "Message": message.strip()}
+                current_message = {
+                    "Date": date,
+                    "Time": time,
+                    "Sender": sender,
+                    "Message": message.strip(),
+                }
             elif current_message:
                 # Continuation of the current message
                 current_message["Message"] += "\n" + line
@@ -60,7 +65,9 @@ class DataProcessor:
         dataframe["Time"] = dataframe["Time"].str.replace("\u202f", " ", regex=True)
 
         # Remove rows with missing values and media messages
-        return dataframe.dropna().loc[~dataframe["Message"].str.contains("<Media omitted>")]
+        return dataframe.dropna().loc[
+            ~dataframe["Message"].str.contains("<Media omitted>")
+        ]
 
     @staticmethod
     def transform(dataframe: pd.DataFrame) -> pd.DataFrame:
@@ -71,9 +78,14 @@ class DataProcessor:
         :return: The transformed DataFrame
         """
         # Combine 'Date' and 'Time' into a single 'DateTime' column and convert to datetime type
-        dataframe["DateTime"] = pd.to_datetime(f"{dataframe['Date']} {dataframe['Time']}", format="%d/%m/%Y %I:%M %p")
-
+        dataframe["DateTime"] = pd.to_datetime(
+            dataframe["Date"] + " " + dataframe["Time"], format="%d/%m/%Y %I:%M %p"
+        )
         dataframe.set_index("DateTime", inplace=True)  # Set 'DateTime' as the index
+
+        # Add a 'Message_Count' column to count the number of messages per day
+        dataframe["Message_Count"] = 1
+        dataframe = dataframe.resample("D").sum()
 
         return dataframe
 

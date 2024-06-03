@@ -14,7 +14,9 @@ class Logger:
         """
         # Create a logger
         self.logger = logging.getLogger(name)
-        self.logger.setLevel(logging.DEBUG)  # Set the threshold of logger to debug level
+        self.logger.setLevel(
+            logging.DEBUG
+        )  # Set the threshold of logger to debug level
 
         # Create console handler and set level to debug
         ch = logging.StreamHandler()
