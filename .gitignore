@@ -13,6 +13,8 @@ venv.bak/
 # Data
 data/
 
+LLM_testing/data/
+
 # IDE settings
 .idea/
 .vscode/
